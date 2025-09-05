@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Variables & base ---------- */
+:root {
+  --neon-cyan: 34 211 238; /* #22d3ee */
+  --neon-pink: 236 72 153; /* #ec4899 */
+  --neon-lime: 132 204 22; /* #84cc16 */
+  --bg-dark-1: 2 6 23; /* very dark */
+  --bg-dark-2: 6 8 20;
+  --muted: 148 163 184; /* for ticks */
+}
+.bg-grid {
+  background: radial-gradient(
+      circle at 10% 10%,
+      rgba(var(--neon-cyan), 0.02) 0 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(var(--neon-pink), 0.015) 0 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      180deg,
+      rgba(var(--bg-dark-1), 1) 0%,
+      rgba(var(--bg-dark-2), 1) 60%,
+      #000 100%
+    );
+  background-size: 40px 40px, 40px 40px, cover;
+  color: #e6eef6; /* основной текст: светлый */
+}
+
+/* глобально: body / app - тёмный фон */
+body,
+#root {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--bg-dark-1)),
+    rgb(var(--bg-dark-2))
+  );
+  color: #e6eef6;
+}
+/* ---------- Neon utilities ---------- */
+.neon-border {
+  border: 1px solid rgba(var(--neon-cyan), 0.14);
+  box-shadow: 0 6px 30px rgba(var(--neon-cyan), 0.06),
+    0 0 18px rgba(var(--neon-pink), 0.03);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(0, 0, 0, 0.18)
+  );
+  backdrop-filter: blur(6px);
+}
+
+.neon-glow {
+  box-shadow: 0 10px 40px rgba(var(--neon-cyan), 0.14),
+    0 0 30px rgba(var(--neon-pink), 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* Header neon style */
+.header-neon {
+  font-family: 'Orbitron', system-ui, sans-serif;
+  text-shadow: 0 0 8px rgba(var(--neon-cyan), 0.9),
+    0 0 22px rgba(var(--neon-pink), 0.12);
+  color: rgb(var(--neon-cyan));
+  letter-spacing: 1px;
+}
+
+/* Small neon text */
+.text-neon {
+  text-shadow: 0 0 6px rgba(var(--neon-cyan), 0.6);
+}
+
+/* Recharts tooltip override */
+.recharts-default-tooltip {
+  background: rgba(5, 8, 15, 0.95);
+  border: 1px solid rgba(var(--neon-cyan), 0.28);
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(var(--neon-cyan), 0.06);
+}
+
+/* subtle table row stripe */
+.table-row-stripe:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* small utility for subtle neon hover */
+.hover-neon:hover {
+  box-shadow: 0 10px 30px rgba(var(--neon-cyan), 0.08);
+  transform: translateY(-3px);
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+  .header-neon {
+    font-size: 1.6rem;
+  }
+}
