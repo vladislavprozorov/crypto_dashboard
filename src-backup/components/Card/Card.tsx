@@ -25,9 +25,7 @@ export default function Card({ coin }: { coin: Coin }) {
           <div className="text-2xl font-extrabold text-lime-400">
             ${coin.current_price.toLocaleString()}
           </div>
-          <div className="text-xs text-gray-500">
-            MC ${coin.market_cap.toLocaleString()}
-          </div>
+          <div className="text-xs text-gray-500">MC ${coin.market_cap.toLocaleString()}</div>
         </div>
       </div>
 
@@ -39,12 +37,7 @@ export default function Card({ coin }: { coin: Coin }) {
 
         <button
           className="flex items-center gap-2 px-3 py-1 rounded bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.03)] text-cyan-200"
-          onClick={() =>
-            window.open(
-              `https://www.coingecko.com/en/coins/${coin.id}`,
-              '_blank'
-            )
-          }
+          onClick={() => window.open(`https://www.coingecko.com/en/coins/${coin.id}`, '_blank')}
         >
           <FaExternalLinkAlt className="w-3 h-3" />
           View

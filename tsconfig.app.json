@@ -14,7 +14,10 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
+    /* Дополнения для типов */
+    "types": ["prettier"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

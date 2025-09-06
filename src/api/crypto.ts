@@ -24,15 +24,9 @@ export interface CoinHistoryResponse {
   total_volumes?: number[][];
 }
 
-export async function getCoinHistory(
-  coinId = 'bitcoin',
-  days = 7
-): Promise<CoinHistoryResponse> {
-  const { data } = await api.get<CoinHistoryResponse>(
-    `/coins/${coinId}/market_chart`,
-    {
-      params: { vs_currency: 'usd', days },
-    }
-  );
+export async function getCoinHistory(coinId = 'bitcoin', days = 7): Promise<CoinHistoryResponse> {
+  const { data } = await api.get<CoinHistoryResponse>(`/coins/${coinId}/market_chart`, {
+    params: { vs_currency: 'usd', days },
+  });
   return data;
 }

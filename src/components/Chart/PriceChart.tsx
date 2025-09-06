@@ -24,24 +24,16 @@ export default function PriceChart({
       transition={{ duration: 0.5 }}
       className="neon-border rounded-2xl p-6"
       style={{
-        background:
-          'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.28))',
+        background: 'linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.28))',
       }}
     >
       <h2 className="mb-4 text-xl font-bold text-pink-400">{title}</h2>
 
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            data={data}
-            margin={{ top: 8, right: 12, left: 0, bottom: 6 }}
-          >
+          <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 6 }}>
             <CartesianGrid stroke="rgba(255,255,255,0.03)" vertical={false} />
-            <XAxis
-              dataKey="date"
-              tick={{ fill: '#94a3b8', fontSize: 11 }}
-              axisLine={false}
-            />
+            <XAxis dataKey="date" tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} />
             <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} axisLine={false} />
             <Tooltip
               contentStyle={{

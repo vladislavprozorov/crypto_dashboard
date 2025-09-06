@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FaRocket } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import {
-  useTopCoins,
-  useCoinHistory,
-} from '../../features/coins/model/useCoins';
+import { useTopCoins, useCoinHistory } from '../../features/coins/model/useCoins';
 import Card from '../../components/Card/Card';
 import PriceChart from '../../components/Chart/PriceChart';
 import CoinsTable from '../../components/Table/CoinsTable';
@@ -58,9 +55,7 @@ export default function Dashboard() {
           <div className="w-12 h-12 rounded-full neon-glow bg-gradient-to-br from-cyan-400/20 to-pink-400/12 flex items-center justify-center">
             <FaRocket className="text-cyan-200" />
           </div>
-          <h1 className="text-4xl font-extrabold header-neon">
-            Cyberpunk Crypto Dashboard
-          </h1>
+          <h1 className="text-4xl font-extrabold header-neon">Cyberpunk Crypto Dashboard</h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -98,9 +93,7 @@ export default function Dashboard() {
       </header>
 
       {/* Общие ошибки */}
-      {error && (
-        <div className="text-red-400 bg-red-900/20 p-3 rounded">{error}</div>
-      )}
+      {error && <div className="text-red-400 bg-red-900/20 p-3 rounded">{error}</div>}
 
       {/* Карточки: показываем skeleton'ы если coinsLoading */}
       <motion.div
@@ -134,9 +127,7 @@ export default function Dashboard() {
             {selectedCoin ? `History — ${selectedCoin}` : 'History'}
           </h2>
           <div className="text-sm text-gray-400">
-            {chartLoading
-              ? 'Updating...'
-              : `Showing last ${history?.length ?? 0} days`}
+            {chartLoading ? 'Updating...' : `Showing last ${history?.length ?? 0} days`}
           </div>
         </div>
 

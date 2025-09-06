@@ -32,16 +32,11 @@ api.interceptors.request.use(
     }
     // простое логирование
     if (import.meta.env.DEV) {
-      console.debug(
-        '[API request]',
-        config.method,
-        config.url,
-        config.params ?? ''
-      );
+      console.debug('[API request]', config.method, config.url, config.params ?? '');
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 /** Response interceptor:
@@ -60,14 +55,12 @@ api.interceptors.response.use(
       (error.response?.data as any)?.message;
     const msg =
       serverMessage ||
-      (status
-        ? `Request failed with status ${status}`
-        : error.message || 'Network Error');
+      (status ? `Request failed with status ${status}` : error.message || 'Network Error');
 
     // Можно создавать кастомный Error-класс, но для простоты:
     const e = new Error(msg);
     return Promise.reject(e);
-  }
+  },
 );
 
 export default api;

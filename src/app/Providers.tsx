@@ -14,8 +14,7 @@ const defaultOptions: DefaultOptions = {
     refetchOnWindowFocus: false, // не рефетчить каждый фокус вкладки (можно true для дашборда)
     refetchOnReconnect: true,
     refetchOnMount: false,
-    retryDelay: (attemptIndex: number) =>
-      Math.min(1000 * 2 ** attemptIndex, 30_000),
+    retryDelay: (attemptIndex: number) => Math.min(1000 * 2 ** attemptIndex, 30_000),
   },
   mutations: {
     retry: 1,
