@@ -1,35 +1,22 @@
-import { useEffect, useState } from 'react';
-import { getTopCoins, getCoinHistory } from '../api/crypto';
-import type { Coin, PricePoint } from '../types/crypto';
+// src/hooks/useCryptoData.ts
+import { useTopCoins, useCoinHistory } from '../features/coins/model/useCoins';
+import type { PricePoint, Coin } from '../types/crypto';
 
 export function useCryptoData(selectedCoin = 'bitcoin', days = 7) {
-  const [coins, setCoins] = useState<Coin[]>([]);
-  const [history, setHistory] = useState<PricePoint[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const topQuery = useTopCoins();
+  const historyQuery = useCoinHistory(selectedCoin, days);
 
-  useEffect(() => {
-    let mounted = true;
-    setLoading(true);
-    Promise.all([getTopCoins(), getCoinHistory(selectedCoin, days)])
-      .then(([coinsData, historyData]) => {
-        if (!mounted) return;
-        setCoins(coinsData || []);
-        const formatted = (historyData.prices || []).map((p: number[]) => ({
-          date: new Date(p[0]).toLocaleDateString(),
-          price: p[1],
-        }));
-        setHistory(formatted);
-      })
-      .catch((e) => {
-        if (!mounted) return;
-        setError(String(e));
-      })
-      .finally(() => mounted && setLoading(false));
-    return () => {
-      mounted = false;
-    };
-  }, [selectedCoin, days]);
-
-  return { coins, history, loading, error };
+  return {
+    coins: topQuery.data ?? ([] as Coin[]),
+    history: historyQuery.data ?? ([] as PricePoint[]),
+    loading: topQuery.isLoading || historyQuery.isLoading,
+    error: topQuery.error ?? historyQuery.error ?? null,
+    // полезные методы, которые раньше могли быть в хуке:
+    refetch: async () => {
+      await Promise.all([topQuery.refetch(), historyQuery.refetch()]);
+    },
+    // expose raw queries if needed
+    _topQuery: topQuery,
+    _historyQuery: historyQuery,
+  };
 }
