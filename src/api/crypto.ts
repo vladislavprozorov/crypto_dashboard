@@ -1,3 +1,7 @@
+/**
+ * @copyright vladislavprozorov
+ */
+
 import api from './axios';
 import type { Coin } from '../types/crypto';
 

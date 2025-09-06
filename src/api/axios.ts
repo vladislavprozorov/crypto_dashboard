@@ -1,4 +1,7 @@
-// src/api/axios.ts
+/**
+ * @copyright vladislavprozorov
+ */
+
 import axios, { AxiosError } from 'axios';
 
 // const API_URL =
