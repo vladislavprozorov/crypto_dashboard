@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { FaRocket } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { useTopCoins, useCoinHistory } from '../../features/coins/model/useCoins';
-import Card from '../../components/Card/Card';
-import PriceChart from '../../components/Chart/PriceChart';
-import CoinsTable from '../../components/Table/CoinsTable';
+import { Card, PriceChart, CoinsTable } from '../../shared/ui';
 
 /**
  * Dashboard — теперь использует react-query хуки напрямую.

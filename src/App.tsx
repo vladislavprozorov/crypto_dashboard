@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react';
-import { Loader } from './shared/ui/Loader';
-import { ErrorBoundary } from './shared/ui/ErrorBoundary';
+import { Loader, ErrorBoundary } from './shared/ui';
 const DashBoard = lazy(() => import('./pages/DashBoard/DashBoard'));
 import './styles/index.css';
 function App() {
