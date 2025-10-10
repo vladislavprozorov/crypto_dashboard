@@ -16,6 +16,8 @@ const api = axios.create({
   },
 });
 
+
+
 /** Request interceptor:
  *  - добавить auth header если есть токен
  *  - можно логировать запросы
@@ -30,9 +32,10 @@ api.interceptors.request.use(
     } catch {
       // ignore (например, в SSR localStorage не доступен)
     }
-    // простое логирование
+    // безопасное логирование
     if (import.meta.env.DEV) {
-      console.debug('[API request]', config.method, config.url, config.params ?? '');
+      const params = config.params ? safeStringify(config.params) : '';
+      console.debug('[API request]', config.method, config.url, params);
     }
     return config;
   },
@@ -44,7 +47,16 @@ api.interceptors.request.use(
  *  - можно вернуть res.data напрямую (но я оставлю структуру стандартной)
  */
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (import.meta.env.DEV) {
+      // логируем только размер данных или статус
+      const info = response?.data
+        ? { size: Object.keys(response.data).length }
+        : response?.status ?? safeStringify(response);
+      console.debug('[API response]', response.config?.url, info);
+    }
+    return response;
+  },
   (error: AxiosError) => {
     // Простая унификация ошибки
     const status = error.response?.status;
@@ -62,5 +74,20 @@ api.interceptors.response.use(
     return Promise.reject(e);
   },
 );
+
+function safeStringify(obj: any) {
+  try {
+    const seen = new WeakSet();
+    return JSON.stringify(obj, (k, v) => {
+      if (typeof v === 'object' && v !== null) {
+        if (seen.has(v)) return '[Circular]';
+        seen.add(v);
+      }
+      return v;
+    }, 2);
+  } catch {
+    return String(obj);
+  }
+}
 
 export default api;

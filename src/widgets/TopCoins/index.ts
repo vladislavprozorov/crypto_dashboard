@@ -1,0 +1,1 @@
+export { TopCoinsWidget } from './TopCoinsWidget';

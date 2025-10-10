@@ -1,8 +1,9 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import type { Coin } from '../../../types/crypto';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 
-export default function Card({ coin }: { coin: Coin }) {
+const Card: React.FC<{ coin: Coin }> = React.memo(({ coin }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
@@ -45,4 +46,6 @@ export default function Card({ coin }: { coin: Coin }) {
       </div>
     </motion.div>
   );
-}
+});
+
+export default Card;

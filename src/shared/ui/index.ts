@@ -5,3 +5,5 @@ export { default as CoinsTable } from './Table/CoinsTable';
 // Suspense
 export { default as Loader } from './Feedback/Loader';
 export { default as ErrorBoundary } from './Feedback/ErrorBoundary';
+export { default as PageLayout } from './Layout/PageLayout';
+export { Tooltip } from './Tooltip';

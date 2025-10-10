@@ -1,2 +1,6 @@
 import { bootstrap } from './app/bootstrap';
-bootstrap();
+import { reportWebVitals } from './shared/lib/web-vitals';
+
+bootstrap().then(() => {
+  reportWebVitals(console.log);
+});

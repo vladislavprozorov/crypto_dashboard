@@ -1,13 +1,14 @@
-import AppRouter from "./app/router/AppRouter";
-import Dashboard from "./pages/DashBoard/DashBoard";
-import { ErrorBoundary } from "./shared/ui";
+import React, { Suspense } from "react";
+import { ErrorBoundary, Loader } from "./shared/ui";
+
+const LazyAppRouter = React.lazy(() => import("./app/router/AppRouter"));
 
 function App() {
   return (
     <ErrorBoundary>
- 
-        <Dashboard/>
-     
+      <Suspense fallback={<Loader />}>
+        <LazyAppRouter />
+      </Suspense>
     </ErrorBoundary>
   );
 }
