@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useTopCoins, useCoinHistory } from '../../features/coins/model/useCoins';
 import { Card, PriceChart, CoinsTable } from '../../shared/ui';
 
+
 /**
  * Dashboard — теперь использует react-query хуки напрямую.
  * Поддерживает выбор монеты для графика и отдельные loading states.
@@ -59,10 +60,11 @@ export default function Dashboard() {
         <div className="flex items-center gap-3">
           {/* селектор монеты для графика */}
           <select
-            value={selectedCoin ?? ''}
-            onChange={(e) => setSelectedCoin(e.target.value)}
-            className="bg-[rgba(255,255,255,0.02)] text-sm rounded px-3 py-2 neon-border"
-          >
+  value={selectedCoin ?? ''}
+  onChange={(e) => setSelectedCoin(e.target.value)}
+  className="bg-[rgba(255,255,255,0.02)] text-gray-200 text-sm rounded px-3 py-2 neon-border"
+>
+
             {/* если данные еще не пришли — покажем placeholder */}
             {!coins && <option value="">Loading...</option>}
             {coins &&
