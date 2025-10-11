@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import type { Coin } from '../../../types/crypto';
 import { FaSearch, FaCheck } from 'react-icons/fa';
+import type { CoinEntity } from '../../../entities/coin';
 
 // Экранирование для XSS
 function escapeHtml(text: unknown) {
@@ -16,9 +17,9 @@ function escapeHtml(text: unknown) {
 }
 
 interface CoinDropdownProps {
-  coins: Coin[];
+  coins: CoinEntity[];
   selectedCoin: string | null;
-  setSelectedCoin: (id: string) => void;
+  setSelectedCoin: (coin: string | null) => void;
 }
 
 const CoinDropdown: React.FC<CoinDropdownProps> = React.memo((props) => {
