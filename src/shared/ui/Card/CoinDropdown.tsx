@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import type { Coin } from '../../../types/crypto';
+
 import { FaSearch, FaCheck } from 'react-icons/fa';
 import type { CoinEntity } from '../../../entities/coin';
 
