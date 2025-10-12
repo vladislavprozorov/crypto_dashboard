@@ -13,7 +13,8 @@
     "prettier:check": "prettier --check ./src",
     "test": "vitest run",
     "docs": "typedoc --out docs src",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test:run": "vitest run"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
@@ -51,6 +52,7 @@
     "@types/prettier": "^3.0.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
     "@vitejs/plugin-react": "^5.0.0",
