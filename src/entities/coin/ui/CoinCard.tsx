@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+
 import { CoinEntity } from '../model/Coin';
 import { FaExternalLinkAlt, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
