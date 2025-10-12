@@ -21,7 +21,7 @@
 
 ## Пример работы проекта
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://dashboard-scrypto.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/92f7167d-8fde-4196-9cbd-292d2c601672/deploy-status)](https://dashboard-scrypto.netlify.app/)
 
 
 
