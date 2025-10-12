@@ -1,0 +1,63 @@
+# Единое название для всего процесса
+name: CI & Deploy
+
+# Триггеры:
+# 1. Запускать на каждый пуш в main
+# 2. Запускать на каждый Pull Request, который идет в main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Разрешения, которые нужны для деплоя на GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Единая задача, которая выполняет всё
+jobs:
+  build-test-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Шаг 1: Скачиваем код
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Шаг 2: Настраиваем Node.js (используем одну, последнюю версию)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Кеширование ускорит последующие сборки
+
+      # Шаг 3: Устанавливаем зависимости
+      - name: Install dependencies
+        run: npm ci
+
+      # --- ЭТАП CI ---
+      # Эти шаги выполняются всегда: и при PR, и при push в main
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run prettier:check
+
+      - name: Run tests
+        run: npm run test
+      
+      # Сборка проекта также является частью CI, чтобы убедиться, что проект вообще собирается
+      - name: Build project
+        run: npm run build
+
+      # --- ЭТАП CD (Deploy) ---
+      # Этот шаг будет выполняться ТОЛЬКО при пуше в ветку main.
+      # Он не будет выполняться для Pull Request'ов.
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist # Указываем папку, которую собрали на предыдущем шаге
