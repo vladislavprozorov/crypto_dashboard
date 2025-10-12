@@ -19,7 +19,7 @@
 - **TypeScript everywhere** | Полная типизация для API, хуков и UI
 - **Vite + React 18** | Быстрая сборка и мгновенная разработка |
 
-## Пример работы проекта
+## Ссылка на рабочий проект
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/92f7167d-8fde-4196-9cbd-292d2c601672/deploy-status)](https://dashboard-scrypto.netlify.app/)
 
