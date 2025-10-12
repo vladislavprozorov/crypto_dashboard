@@ -91,7 +91,7 @@ src/
 
 ```bash
 # 1. Клонируем репозиторий
-git clone https://github.com/<your-username>/crypto-dashboard.git
+git clone https://github.com/vladislavprozorov/crypto-dashboard.git
 
 # 2. Переходим в проект
 cd crypto-dashboard
