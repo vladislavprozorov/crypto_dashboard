@@ -10,8 +10,8 @@ type SortKey = 'current_price' | 'market_cap' | 'name';
 
 function exportCSV(data: Coin[]) {
   const header = ['Name', 'Symbol', 'Price', 'Market Cap'];
-  const rows = data.map(c => [c.name, c.symbol, c.current_price, c.market_cap]);
-  const csv = [header, ...rows].map(r => r.join(',')).join('\n');
+  const rows = data.map((c) => [c.name, c.symbol, c.current_price, c.market_cap]);
+  const csv = [header, ...rows].map((r) => r.join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -37,10 +37,9 @@ function exportPDF(data: Coin[]) {
       });
 
       doc.save('coins.pdf');
-    })
+    }),
   );
 }
-
 
 const CoinsTable: React.FC<CoinsTableProps> = React.memo(({ coins }) => {
   const [sortKey, setSortKey] = useState<SortKey>('market_cap');
@@ -58,9 +57,7 @@ const CoinsTable: React.FC<CoinsTableProps> = React.memo(({ coins }) => {
   }, [favorites]);
 
   function toggleFavorite(id: string) {
-    setFavorites(favs =>
-      favs.includes(id) ? favs.filter(f => f !== id) : [...favs, id]
-    );
+    setFavorites((favs) => (favs.includes(id) ? favs.filter((f) => f !== id) : [...favs, id]));
   }
 
   function handleSort(key: SortKey) {
@@ -73,20 +70,18 @@ const CoinsTable: React.FC<CoinsTableProps> = React.memo(({ coins }) => {
 
   const filteredCoins = useMemo(() => {
     let result = coins.filter(
-      c =>
+      (c) =>
         c.name.toLowerCase().includes(search.toLowerCase()) ||
-        c.symbol.toLowerCase().includes(search.toLowerCase())
+        c.symbol.toLowerCase().includes(search.toLowerCase()),
     );
-    if (showFavOnly) result = result.filter(c => favorites.includes(c.id));
+    if (showFavOnly) result = result.filter((c) => favorites.includes(c.id));
     return result;
   }, [coins, search, showFavOnly, favorites]);
 
   const sortedCoins = useMemo(() => {
     return [...filteredCoins].sort((a, b) => {
       if (sortKey === 'name') {
-        return sortDir === 'asc'
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
+        return sortDir === 'asc' ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
       }
       return sortDir === 'asc'
         ? (a[sortKey] as number) - (b[sortKey] as number)
@@ -107,13 +102,13 @@ const CoinsTable: React.FC<CoinsTableProps> = React.memo(({ coins }) => {
           <input
             type="text"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
             placeholder="Поиск..."
             className="px-3 py-2 rounded bg-gray-800 text-gray-200 neon-border"
           />
           <button
             className={`px-3 py-2 rounded neon-border flex items-center gap-2 ${showFavOnly ? 'bg-yellow-400 text-black' : 'bg-cyan-900 text-cyan-200'}`}
-            onClick={() => setShowFavOnly(v => !v)}
+            onClick={() => setShowFavOnly((v) => !v)}
             title="Показать только избранные"
           >
             <FaStar />
@@ -144,7 +139,10 @@ const CoinsTable: React.FC<CoinsTableProps> = React.memo(({ coins }) => {
             <th className="p-3 text-left cursor-pointer" onClick={() => handleSort('name')}>
               Name {sortKey === 'name' && (sortDir === 'asc' ? '▲' : '▼')}
             </th>
-            <th className="p-3 text-left cursor-pointer" onClick={() => handleSort('current_price')}>
+            <th
+              className="p-3 text-left cursor-pointer"
+              onClick={() => handleSort('current_price')}
+            >
               Price {sortKey === 'current_price' && (sortDir === 'asc' ? '▲' : '▼')}
             </th>
             <th className="p-3 text-left cursor-pointer" onClick={() => handleSort('market_cap')}>

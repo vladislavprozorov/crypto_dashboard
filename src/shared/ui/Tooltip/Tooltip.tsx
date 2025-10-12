@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
-export const Tooltip: React.FC<{ text: string; children: React.ReactNode }> = ({ text, children }) => {
+export const Tooltip: React.FC<{ text: string; children: React.ReactNode }> = ({
+  text,
+  children,
+}) => {
   const [show, setShow] = useState(false);
   return (
-    <span className="relative"
+    <span
+      className="relative"
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       tabIndex={0}

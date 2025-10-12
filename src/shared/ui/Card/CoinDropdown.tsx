@@ -6,14 +6,18 @@ import type { CoinEntity } from '../../../entities/coin';
 // Экранирование для XSS
 function escapeHtml(text: unknown) {
   if (typeof text !== 'string') return '';
-  return text.replace(/[&<>"'`]/g, (char) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;',
-    '`': '&#96;',
-  }[char] || char));
+  return text.replace(
+    /[&<>"'`]/g,
+    (char) =>
+      ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '`': '&#96;',
+      })[char] || char,
+  );
 }
 
 interface CoinDropdownProps {
@@ -61,7 +65,7 @@ const CoinDropdown: React.FC<CoinDropdownProps> = React.memo((props) => {
           {selectedCoin
             ? escapeHtml(
                 coins.find((c) => c.id === selectedCoin)?.name ??
-                (typeof selectedCoin === 'string' ? selectedCoin : '')
+                  (typeof selectedCoin === 'string' ? selectedCoin : ''),
               )
             : 'Выберите монету'}
         </span>
@@ -108,9 +112,7 @@ const CoinDropdown: React.FC<CoinDropdownProps> = React.memo((props) => {
               >
                 <span>
                   {escapeHtml(c.name)}
-                  <span className="text-xs text-gray-400">
-                    ({escapeHtml(c.symbol)})
-                  </span>
+                  <span className="text-xs text-gray-400">({escapeHtml(c.symbol)})</span>
                 </span>
                 {selectedCoin === c.id && <FaCheck className="text-lime-400" />}
               </li>
@@ -127,4 +129,3 @@ const CoinDropdown: React.FC<CoinDropdownProps> = React.memo((props) => {
 // @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px);} to { opacity: 1; transform: translateY(0);} }
 
 export default CoinDropdown;
-

@@ -1,17 +1,22 @@
 import type { FC } from 'react';
-import { PriceChart } from '../../../../shared/ui'; // shared/ui
-import { DASHBOARD_CONSTANTS } from '../../../../entities/dashboard/constants'; // entities/dashboard/constants
+import { PriceChart } from '../../../../shared/ui';
+import { DASHBOARD_CONSTANTS } from '../../../../entities/dashboard/constants';
+
+interface PricePoint {
+  date: string;
+  price: number;
+}
 
 interface PriceChartSectionProps {
   selectedCoin: string | null;
   chartLoading: boolean;
-  history: any[]; // уточните тип
+  history: PricePoint[];
 }
 
 export const PriceChartSection: FC<PriceChartSectionProps> = ({
   selectedCoin,
   chartLoading,
-  history
+  history,
 }) => (
   <div className={DASHBOARD_CONSTANTS.STYLES.CONTAINER}>
     <div className="flex items-center justify-between mb-4">
@@ -24,9 +29,7 @@ export const PriceChartSection: FC<PriceChartSectionProps> = ({
     </div>
 
     {chartLoading ? (
-      <div className="h-80 flex items-center justify-center text-gray-400">
-        Loading chart...
-      </div>
+      <div className="h-80 flex items-center justify-center text-gray-400">Loading chart...</div>
     ) : (
       <PriceChart
         data={history}

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { FaCheckCircle, FaExclamationCircle, FaInfoCircle } from 'react-icons/fa';
 
-export const Toast: React.FC<{ message: unknown; type?: 'success' | 'error' | 'info'; onClose: () => void }> = ({
-  message,
-  type = 'info',
-  onClose,
-}) => {
+export const Toast: React.FC<{
+  message: unknown;
+  type?: 'success' | 'error' | 'info';
+  onClose: () => void;
+}> = ({ message, type = 'info', onClose }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, 3000);
     return () => clearTimeout(timer);
@@ -32,7 +32,9 @@ export const Toast: React.FC<{ message: unknown; type?: 'success' | 'error' | 'i
   }
 
   return (
-    <div className={`fixed top-6 right-6 px-6 py-3 rounded shadow-lg text-white flex items-center gap-2 ${color} animate-fade-in z-50`}>
+    <div
+      className={`fixed top-6 right-6 px-6 py-3 rounded shadow-lg text-white flex items-center gap-2 ${color} animate-fade-in z-50`}
+    >
       <Icon />
       <span>{text}</span>
     </div>

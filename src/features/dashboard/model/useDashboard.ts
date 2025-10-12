@@ -37,10 +37,7 @@ export const useDashboard = (): DashboardState & {
       ? 'History fetch error'
       : null;
 
-  const coinEntities = useMemo(
-    () => (coins ?? []).map((c) => new CoinEntity(c)),
-    [coins]
-  );
+  const coinEntities = useMemo(() => (coins ?? []).map((c) => new CoinEntity(c)), [coins]);
 
   useEffect(() => {
     if (!selectedCoin && coins && coins.length > 0) {
@@ -50,11 +47,12 @@ export const useDashboard = (): DashboardState & {
 
   useEffect(() => {
     if (coins) {
-      const btc = coins.find(c => c.id === 'bitcoin');
-      if (btc && Math.abs(btc.price_change_percentage_24h ?? 0) > DASHBOARD_CONSTANTS.BITCOIN_PRICE_THRESHOLD) {
-        setToast(
-          `Bitcoin изменился на ${btc.price_change_percentage_24h?.toFixed(2)}% за 24ч!`
-        );
+      const btc = coins.find((c) => c.id === 'bitcoin');
+      if (
+        btc &&
+        Math.abs(btc.price_change_percentage_24h ?? 0) > DASHBOARD_CONSTANTS.BITCOIN_PRICE_THRESHOLD
+      ) {
+        setToast(`Bitcoin изменился на ${btc.price_change_percentage_24h?.toFixed(2)}% за 24ч!`);
       }
     }
   }, [coins]);
@@ -76,6 +74,6 @@ export const useDashboard = (): DashboardState & {
     history: history ?? [],
     account,
     connect,
-    refetchData
+    refetchData,
   };
 };

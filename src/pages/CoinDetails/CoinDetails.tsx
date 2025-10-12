@@ -24,8 +24,15 @@ export default function CoinDetails() {
         </div>
         <div className="neon-border rounded-2xl p-6">
           <h2 className="text-xl font-bold mb-2 text-lime-400">Динамика и описание</h2>
-          <div className="text-gray-400 mb-4">Здесь будет описание монеты, рыночная динамика, капитализация и другие метрики.</div>
-          <div className="text-gray-400">Текущая цена: <span className="font-bold text-cyan-400">{history?.[history.length-1]?.price ?? '—'}</span></div>
+          <div className="text-gray-400 mb-4">
+            Здесь будет описание монеты, рыночная динамика, капитализация и другие метрики.
+          </div>
+          <div className="text-gray-400">
+            Текущая цена:{' '}
+            <span className="font-bold text-cyan-400">
+              {history?.[history.length - 1]?.price ?? '—'}
+            </span>
+          </div>
         </div>
       </div>
       <div className="neon-border rounded-2xl p-6">

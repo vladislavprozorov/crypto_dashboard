@@ -38,9 +38,7 @@ export const CoinCard: React.FC<{ coin: CoinEntity }> = React.memo(({ coin }) =>
       <div className="mt-4 flex items-center justify-between text-xs text-gray-400">
         <div className={`flex items-center gap-2 ${changeColor}`}>
           {changeIcon}
-          <span>
-            24h: {change ? `${change.toFixed(2)}%` : '—'}
-          </span>
+          <span>24h: {change ? `${change.toFixed(2)}%` : '—'}</span>
         </div>
         <button
           className="flex items-center gap-2 px-3 py-1 rounded bg-[rgba(255,255,255,0.02)] hover:bg-[rgba(255,255,255,0.03)] text-cyan-200"

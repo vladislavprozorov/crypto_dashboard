@@ -4,8 +4,7 @@
 
 import axios, { AxiosError } from 'axios';
 
-const API_URL =
-  import.meta.env.VITE_COINGECKO_API || 'https://api.coingecko.com/api/v3';
+const API_URL = import.meta.env.VITE_COINGECKO_API || 'https://api.coingecko.com/api/v3';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -15,8 +14,6 @@ const api = axios.create({
     Accept: 'application/json',
   },
 });
-
-
 
 /** Request interceptor:
  *  - добавить auth header если есть токен
@@ -52,7 +49,7 @@ api.interceptors.response.use(
       // логируем только размер данных или статус
       const info = response?.data
         ? { size: Object.keys(response.data).length }
-        : response?.status ?? safeStringify(response);
+        : (response?.status ?? safeStringify(response));
       console.debug('[API response]', response.config?.url, info);
     }
     return response;
@@ -75,16 +72,20 @@ api.interceptors.response.use(
   },
 );
 
-function safeStringify(obj: any) {
+function safeStringify(obj: unknown) {
   try {
     const seen = new WeakSet();
-    return JSON.stringify(obj, (_, v) => {
-      if (typeof v === 'object' && v !== null) {
-        if (seen.has(v)) return '[Circular]';
-        seen.add(v);
-      }
-      return v;
-    }, 2);
+    return JSON.stringify(
+      obj,
+      (_, v) => {
+        if (typeof v === 'object' && v !== null) {
+          if (seen.has(v)) return '[Circular]';
+          seen.add(v);
+        }
+        return v;
+      },
+      2,
+    );
   } catch {
     return String(obj);
   }

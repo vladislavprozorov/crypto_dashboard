@@ -1,15 +1,14 @@
-import { Suspense } from "react";
-import Layout from "../../app/layout/Layout";
-import { DASHBOARD_CONSTANTS } from "../../entities/dashboard/constants";
-import { useDashboard } from "../../features/dashboard/model/useDashboard";
-import { Skeleton } from "../../shared/ui/Feedback";
-import { Toast } from "../../shared/ui/Feedback/Toast";
-import { DashboardHeader } from "../../widgets/Dashboard/ui/DashboardHeader/DashboardHeader";
+import { Suspense } from 'react';
+import Layout from '../../app/layout/Layout';
+import { DASHBOARD_CONSTANTS } from '../../entities/dashboard/constants';
+import { useDashboard } from '../../features/dashboard/model/useDashboard';
+import { Skeleton } from '../../shared/ui/Feedback';
+import { Toast } from '../../shared/ui/Feedback/Toast';
+import { DashboardHeader } from '../../widgets/Dashboard/ui/DashboardHeader/DashboardHeader';
 import { motion } from 'framer-motion';
-import { TopCoinsWidget } from "../../widgets/TopCoins";
-import { PriceChartSection } from "../../widgets/Dashboard/ui/PriceChartSection/PriceChartSection";
-import { CoinsTable } from "../../shared/ui";
-
+import { TopCoinsWidget } from '../../widgets/TopCoins';
+import { PriceChartSection } from '../../widgets/Dashboard/ui/PriceChartSection/PriceChartSection';
+import { CoinsTable } from '../../shared/ui';
 
 export default function Dashboard() {
   const {
@@ -24,14 +23,14 @@ export default function Dashboard() {
     history,
     account,
     connect,
-    refetchData
+    refetchData,
   } = useDashboard();
 
   return (
     <Layout>
       <div className="min-h-screen bg-grid text-gray-100 p-6 space-y-8">
         {toast && <Toast message={toast} type="info" onClose={() => setToast(null)} />}
-        
+
         <DashboardHeader
           coins={coins}
           selectedCoin={selectedCoin}
@@ -52,9 +51,7 @@ export default function Dashboard() {
           {coinsLoading ? (
             Array(DASHBOARD_CONSTANTS.SKELETON_ITEMS_COUNT)
               .fill(null)
-              .map((_, i) => (
-                <Skeleton key={i} className={DASHBOARD_CONSTANTS.STYLES.SKELETON} />
-              ))
+              .map((_, i) => <Skeleton key={i} className={DASHBOARD_CONSTANTS.STYLES.SKELETON} />)
           ) : (
             <Suspense fallback={<Skeleton className={DASHBOARD_CONSTANTS.STYLES.SKELETON} />}>
               <TopCoinsWidget coins={coins} />

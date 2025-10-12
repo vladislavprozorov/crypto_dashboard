@@ -42,7 +42,7 @@ export class CoinEntity implements CoinType {
   formatPrice(): string {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'USD',
     }).format(this.current_price);
   }
 
@@ -55,7 +55,7 @@ export class CoinEntity implements CoinType {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
-      notation: 'compact'
+      notation: 'compact',
     }).format(this.market_cap);
   }
 }

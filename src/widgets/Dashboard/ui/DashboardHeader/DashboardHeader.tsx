@@ -1,7 +1,7 @@
 // src/widgets/Dashboard/ui/DashboardHeader/DashboardHeader.tsx
 import type { FC } from 'react';
 import { FaRocket, FaEthereum } from 'react-icons/fa';
-import CoinDropdown from "../../../../shared/ui/Card/CoinDropdown.tsx";  // shared/ui/Card/CoinDropdown
+import CoinDropdown from '../../../../shared/ui/Card/CoinDropdown.tsx'; // shared/ui/Card/CoinDropdown
 import { Tooltip } from '../../../../shared/ui/Tooltip/Tooltip.tsx'; // shared/ui/Tooltip/Tooltip
 import { DASHBOARD_CONSTANTS } from '../../../../entities/dashboard/constants'; // entities/dashboard/constants
 import { CoinEntity } from '../../../../entities/coin/model/Coin.ts'; // entities/coin/model/Coin
@@ -21,30 +21,21 @@ export const DashboardHeader: FC<DashboardHeaderProps> = ({
   setSelectedCoin,
   onRefresh,
   account,
-  connect
+  connect,
 }) => (
   <header className="flex items-center justify-between">
     <div className="flex items-center gap-4">
       <div className="w-12 h-12 rounded-full neon-glow bg-gradient-to-br from-cyan-400/20 to-pink-400/12 flex items-center justify-center">
         <FaRocket className="text-cyan-200" />
       </div>
-      <h1 className={DASHBOARD_CONSTANTS.STYLES.HEADER}>
-        Cyberpunk Crypto Dashboard
-      </h1>
+      <h1 className={DASHBOARD_CONSTANTS.STYLES.HEADER}>Cyberpunk Crypto Dashboard</h1>
     </div>
 
     <div className="flex items-center gap-3">
-      <CoinDropdown
-        coins={coins}
-        selectedCoin={selectedCoin}
-        setSelectedCoin={setSelectedCoin}
-      />
+      <CoinDropdown coins={coins} selectedCoin={selectedCoin} setSelectedCoin={setSelectedCoin} />
 
       <Tooltip text="Refresh data">
-        <button
-          onClick={onRefresh}
-          className={DASHBOARD_CONSTANTS.STYLES.BUTTON}
-        >
+        <button onClick={onRefresh} className={DASHBOARD_CONSTANTS.STYLES.BUTTON}>
           Refresh
         </button>
       </Tooltip>

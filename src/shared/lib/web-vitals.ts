@@ -1,6 +1,6 @@
 import { onCLS, onFID, onLCP, onTTFB, onFCP } from 'web-vitals';
 
-export function reportWebVitals(onPerfEntry?: (metric: any) => void) {
+export function reportWebVitals(onPerfEntry?: (metric: unknown) => void) {
   if (onPerfEntry && onPerfEntry instanceof Function) {
     onCLS(onPerfEntry);
     onFID(onPerfEntry);

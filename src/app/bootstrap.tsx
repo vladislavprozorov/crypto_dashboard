@@ -4,7 +4,6 @@ import { AppProviders } from './providers/AppProviders';
 import '../styles/index.css';
 import App from '../App';
 
-
 // вспомогательная функция для рендера — экспортируемая для тестов/SSR
 export function renderApp(rootEl: HTMLElement) {
   const root = createRoot(rootEl);
@@ -13,7 +12,7 @@ export function renderApp(rootEl: HTMLElement) {
       <AppProviders>
         <App />
       </AppProviders>
-    </React.StrictMode>
+    </React.StrictMode>,
   );
 }
 // bootstrap может быть async, если нужно дождаться init сервисов

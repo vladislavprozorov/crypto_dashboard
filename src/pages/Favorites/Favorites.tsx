@@ -12,7 +12,7 @@ export default function Favorites() {
 
   const favoriteCoins = useMemo(
     () => (coins ?? []).filter((c) => favorites.includes(c.id)),
-    [coins, favorites]
+    [coins, favorites],
   );
 
   return (

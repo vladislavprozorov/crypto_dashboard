@@ -8,7 +8,7 @@ export interface DashboardState {
   coinsLoading: boolean;
   chartLoading: boolean;
   error: string | null;
-  history: any[]; // specify proper type for history
+  history: unknown[]; // specify proper type for history
   account: string | null;
   connect: () => void;
 }

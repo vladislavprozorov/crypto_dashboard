@@ -13,9 +13,7 @@ const AppRouter = () => (
         path="/coin/:coinId"
         element={<CoinDetails />}
         // Префетч данных для страницы детализации монеты
-        loader={async () => {
-         
-        }}
+        loader={async () => {}}
       />
       <Route path="/favorites" element={<Favorites />} />
     </Routes>
