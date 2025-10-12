@@ -4,11 +4,11 @@
 
 import axios, { AxiosError } from 'axios';
 
-// const API_URL =
-//   import.meta.env.VITE_COINGECKO_API || 'https://api.coingecko.com/api/v3';
+const API_URL =
+  import.meta.env.VITE_COINGECKO_API || 'https://api.coingecko.com/api/v3';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_URL,
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ api.interceptors.response.use(
 function safeStringify(obj: any) {
   try {
     const seen = new WeakSet();
-    return JSON.stringify(obj, (k, v) => {
+    return JSON.stringify(obj, (_, v) => {
       if (typeof v === 'object' && v !== null) {
         if (seen.has(v)) return '[Circular]';
         seen.add(v);

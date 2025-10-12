@@ -21,7 +21,7 @@
 
 ## Пример работы проекта
 
-![Пример интерфейса](./src/assets/demo.gif)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/92f7167d-8fde-4196-9cbd-292d2c601672/deploy-status)](https://app.netlify.com/projects/dashboard-scrypto/deploys)
 
 
 ## Архитектура проекта
