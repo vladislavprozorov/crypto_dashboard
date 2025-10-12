@@ -3,9 +3,9 @@
 Интерактивная платформа для отслеживания криптовалютных рынков в реальном времени.  
 Разработана с акцентом на **чистую архитектуру (Feature-Sliced Design)**, **TypeScript**, и **живое обновление данных через WebSocket**.
 
-## Ссылка на рабочий проект
+## Демо
 
-[Деплой проекта на Netlify](https://dashboard-scrypto.netlify.app/)
+Сайт доступен по ссылке: [Crypto Dashboard Desktop Live](https://vladislavprozorov.github.io/crypto_dashboard/)
 
 ## О проекте
 **Crypto Dashboard** — это современный дашборд для мониторинга криптовалют:
