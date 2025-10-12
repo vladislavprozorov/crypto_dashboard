@@ -7,6 +7,7 @@
 
 Сайт доступен по ссылке: [Crypto Dashboard Desktop Live](https://vladislavprozorov.github.io/crypto_dashboard/)
 
+![Demo](./public/test.gif)
 ## О проекте
 **Crypto Dashboard** — это современный дашборд для мониторинга криптовалют:
 - обновление цен в **реальном времени (WebSocket Binance API)**;
