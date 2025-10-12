@@ -16,9 +16,11 @@ const coin = new CoinEntity({
 
 describe('CoinCard component', () => {
   test('renders coin card with price change', () => {
-    render( <MemoryRouter>
+    render(
+      <MemoryRouter>
         <CoinCard coin={coin} />
-      </MemoryRouter> );
+      </MemoryRouter>,
+    );
     expect(screen.getByText(/Bitcoin/)).toBeInTheDocument();
     expect(screen.getByText(/24h: 2.50%/)).toBeInTheDocument();
   });
