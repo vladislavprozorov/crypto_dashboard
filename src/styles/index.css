@@ -2,222 +2,141 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- Variables & base ---------- */
+/*
+ * Дизайн-токены. Плоская «биржевая ведомость»: бумажный фон, тонкие линейки,
+ * один акцент. Цвета — RGB-тройки, чтобы Tailwind мог подмешивать прозрачность.
+ */
 :root {
-  --neon-cyan: 34 211 238; /* #22d3ee */
-  --neon-pink: 236 72 153; /* #ec4899 */
-  --neon-lime: 132 204 22; /* #84cc16 */
-  --bg-dark-1: 2 6 23; /* very dark */
-  --bg-dark-2: 6 8 20;
-  --muted: 148 163 184; /* for ticks */
+  --paper: 245 244 240;
+  --panel: 255 255 255;
+  --ink: 22 24 29;
+  --on-ink: 245 244 240;
+  --muted: 95 99 107;
+  --rule: 217 215 208;
+  --rule-soft: 236 234 228;
+  --accent: 31 79 224;
+  --up: 23 112 58;
+  --down: 180 35 24;
+  color-scheme: light;
 }
 
-.bg-grid {
-  background:
-    radial-gradient(circle at 10% 10%, rgba(var(--neon-cyan), 0.02) 0 1px, transparent 1px),
-    radial-gradient(circle at 90% 90%, rgba(var(--neon-pink), 0.015) 0 1px, transparent 1px),
-    linear-gradient(180deg, rgba(var(--bg-dark-1), 1) 0%, rgba(var(--bg-dark-2), 1) 60%, #000 100%);
-  background-size:
-    40px 40px,
-    40px 40px,
-    cover;
-  color: #e6eef6; /* основной текст: светлый */
+:root[data-theme='dark'] {
+  --paper: 17 19 23;
+  --panel: 23 26 31;
+  --ink: 232 230 224;
+  --on-ink: 17 19 23;
+  --muted: 150 154 162;
+  --rule: 52 56 64;
+  --rule-soft: 36 39 45;
+  --accent: 122 150 255;
+  --up: 76 184 115;
+  --down: 240 106 94;
+  color-scheme: dark;
 }
 
-/* глобально: body / app - тёмный фон */
-body,
-#root {
-  background: linear-gradient(180deg, rgb(var(--bg-dark-1)), rgb(var(--bg-dark-2)));
-  color: #e6eef6;
-}
-/* ---------- Neon utilities ---------- */
-.neon-border {
-  border: 1px solid rgba(var(--neon-cyan), 0.14);
-  box-shadow:
-    0 6px 30px rgba(var(--neon-cyan), 0.06),
-    0 0 18px rgba(var(--neon-pink), 0.03);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.18));
-  backdrop-filter: blur(6px);
-}
-
-.neon-glow {
-  box-shadow:
-    0 10px 40px rgba(var(--neon-cyan), 0.14),
-    0 0 30px rgba(var(--neon-pink), 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
-}
-
-/* Header neon style */
-.header-neon {
-  font-family: 'Orbitron', system-ui, sans-serif;
-  text-shadow:
-    0 0 8px rgba(var(--neon-cyan), 0.9),
-    0 0 22px rgba(var(--neon-pink), 0.12);
-  color: rgb(var(--neon-cyan));
-  letter-spacing: 1px;
-}
-
-/* Small neon text */
-.text-neon {
-  text-shadow: 0 0 6px rgba(var(--neon-cyan), 0.6);
-}
-
-/* Recharts tooltip override */
-.recharts-default-tooltip {
-  background: rgba(5, 8, 15, 0.95);
-  border: 1px solid rgba(var(--neon-cyan), 0.28);
-  color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 30px rgba(var(--neon-cyan), 0.06);
-}
-
-/* subtle table row stripe */
-.table-row-stripe:nth-child(odd) {
-  background: rgba(255, 255, 255, 0.01);
-}
-
-/* small utility for subtle neon hover */
-.hover-neon:hover {
-  box-shadow: 0 10px 30px rgba(var(--neon-cyan), 0.08);
-  transform: translateY(-3px);
-}
-
-/* responsive tweaks */
-@media (max-width: 768px) {
-  .header-neon {
-    font-size: 1.6rem;
+@layer base {
+  html {
+    background: rgb(var(--paper));
+    color: rgb(var(--ink));
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply font-sans text-sm antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: rgb(var(--accent) / 0.2);
   }
 }
 
-/* Fade-in animation */
-.animate-fade-in {
-  animation: fadeIn 0.2s ease;
+@layer components {
+  .num {
+    @apply font-mono;
+    font-variant-numeric: tabular-nums;
+  }
+  .panel {
+    @apply border border-rule bg-panel;
+  }
+  .panel-title {
+    @apply m-0 text-[13px] font-semibold uppercase tracking-[0.06em];
+  }
+  .btn {
+    @apply inline-flex h-10 cursor-pointer items-center justify-center gap-2 border border-ink bg-transparent px-4 font-medium text-ink transition-colors;
+  }
+  .btn:hover {
+    @apply bg-ink text-on-ink;
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+  .btn-solid {
+    @apply btn bg-ink text-on-ink;
+  }
+  .btn-solid:hover {
+    @apply border-accent bg-accent text-on-ink;
+  }
+  .btn-ghost {
+    @apply inline-flex h-9 cursor-pointer items-center gap-2 border border-rule bg-transparent px-3 text-[13px] text-ink transition-colors;
+  }
+  .btn-ghost:hover {
+    @apply border-ink;
+  }
+  .field {
+    @apply h-11 w-full border border-rule bg-paper px-3 text-ink outline-none transition-colors;
+  }
+  .field:focus {
+    @apply border-ink;
+  }
+  .skeleton {
+    @apply bg-rule-soft;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
 }
-@keyframes fadeIn {
+
+/* Подсветка ячейки при новом тике цены */
+.tick-up {
+  animation: tick-up 0.9s ease-out;
+}
+.tick-down {
+  animation: tick-down 0.9s ease-out;
+}
+@keyframes tick-up {
   from {
-    opacity: 0;
-    transform: translateY(-8px);
+    background: rgb(var(--up) / 0.16);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    background: transparent;
+  }
+}
+@keyframes tick-down {
+  from {
+    background: rgb(var(--down) / 0.16);
+  }
+  to {
+    background: transparent;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
   }
 }
 
-/* Light theme */
-:root.light {
-  --bg-dark-1: 220 225 235; /* светло-серый фон */
-  --bg-dark-2: 200 205 215;
-  --neon-cyan: 6 182 212; /* насыщенный голубой */
-  --neon-pink: 219 39 119; /* насыщенный розовый */
-  --neon-lime: 63 196 0; /* насыщенный лайм */
-  --muted: 60 60 60;
-}
-body.light,
-#root.light {
-  background: linear-gradient(180deg, rgb(var(--bg-dark-1)), rgb(var(--bg-dark-2)));
-  color: #18181b; /* насыщенно чёрный текст */
-}
-.bg-grid.light {
-  background:
-    radial-gradient(circle at 10% 10%, rgba(var(--neon-cyan), 0.12) 0 1px, transparent 1px),
-    radial-gradient(circle at 90% 90%, rgba(var(--neon-pink), 0.1) 0 1px, transparent 1px),
-    linear-gradient(
-      180deg,
-      rgba(var(--bg-dark-1), 1) 0%,
-      rgba(var(--bg-dark-2), 1) 60%,
-      #e5e7eb 100%
-    );
-  color: #18181b;
+@media (prefers-reduced-motion: reduce) {
+  .tick-up,
+  .tick-down,
+  .skeleton {
+    animation: none;
+  }
 }
 
-/* Neon border: светлая тема */
-body.light .neon-border,
-#root.light .neon-border,
-.bg-grid.light .neon-border {
-  border: 1px solid rgba(var(--neon-cyan), 0.28);
-  box-shadow:
-    0 6px 30px rgba(var(--neon-cyan), 0.18),
-    0 0 18px rgba(var(--neon-pink), 0.14);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(220, 225, 235, 0.28));
-  backdrop-filter: blur(4px);
-}
-
-/* Neon glow: светлая тема */
-body.light .neon-glow,
-#root.light .neon-glow,
-.bg-grid.light .neon-glow {
-  box-shadow:
-    0 10px 40px rgba(var(--neon-cyan), 0.28),
-    0 0 30px rgba(var(--neon-pink), 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.14);
-}
-
-/* Header neon: светлая тема */
-body.light .header-neon,
-#root.light .header-neon,
-.bg-grid.light .header-neon {
-  color: rgb(var(--neon-cyan));
-  text-shadow:
-    0 0 8px rgba(var(--neon-cyan), 0.7),
-    0 0 22px rgba(var(--neon-pink), 0.22);
-}
-
-/* Table row stripe: светлая тема */
-body.light .table-row-stripe:nth-child(odd),
-#root.light .table-row-stripe:nth-child(odd),
-.bg-grid.light .table-row-stripe:nth-child(odd) {
-  background: rgba(6, 182, 212, 0.08);
-}
-
-/* Акцентные цвета для текста */
-body.light .text-lime-400,
-#root.light .text-lime-400,
-.bg-grid.light .text-lime-400 {
-  color: #3fc400 !important; /* насыщенный лайм */
-}
-body.light .text-pink-400,
-#root.light .text-pink-400,
-.bg-grid.light .text-pink-400 {
-  color: #db2777 !important; /* насыщенный розовый */
-}
-body.light .text-cyan-200,
-#root.light .text-cyan-200,
-.bg-grid.light .text-cyan-200 {
-  color: #0891b2 !important; /* насыщенный голубой */
-}
-body.light .text-cyan-100,
-#root.light .text-cyan-100,
-.bg-grid.light .text-cyan-100 {
-  color: #0ea5e9 !important;
-}
-
-/* Tooltip: светлая тема */
-body.light .recharts-default-tooltip,
-#root.light .recharts-default-tooltip,
-.bg-grid.light .recharts-default-tooltip {
-  background: #f3f4f6;
-  border: 1px solid rgba(var(--neon-cyan), 0.28);
-  color: #18181b;
-  box-shadow: 0 8px 30px rgba(var(--neon-cyan), 0.18);
-}
-
-/* Skeleton: светлая тема */
-body.light .animate-pulse,
-#root.light .animate-pulse,
-.bg-grid.light .animate-pulse {
-  background-color: #d1d5db !important;
-}
-
-/* Улучшение читаемости для Card, Table, Tooltip */
-body.light .neon-border,
-body.light .neon-glow,
-body.light .table-row-stripe,
-body.light .header-neon,
-body.light .text-lime-400,
-body.light .text-pink-400,
-body.light .text-cyan-200,
-body.light .text-cyan-100 {
-  text-shadow: none !important;
-  font-weight: 500;
+/* Recharts: убираем стандартный фокус-контур у svg */
+.recharts-wrapper,
+.recharts-surface {
+  outline: none;
 }
