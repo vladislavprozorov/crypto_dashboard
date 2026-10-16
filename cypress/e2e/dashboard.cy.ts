@@ -27,4 +27,19 @@ describe('Dashboard', () => {
     cy.contains('a', 'Алерты').click();
     cy.contains('BTC');
   });
+
+  it('ведёт портфель: покупка, продажа сверх остатка отклоняется', () => {
+    cy.visit('/#/portfolio', {
+      // портфель живёт в IndexedDB, которую clearLocalStorage не трогает
+      onBeforeLoad: (win) => void win.indexedDB.deleteDatabase('crypto-dashboard'),
+    });
+    cy.contains('button', 'Добавить первую сделку').click();
+    cy.contains('label', 'Количество').find('input').type('0.5');
+    cy.contains('button', 'Добавить покупку').click();
+    cy.contains('Стоимость портфеля');
+    cy.contains('[role=radio]', 'Продажа').click();
+    cy.contains('label', 'Количество').find('input').clear().type('2');
+    cy.contains('button', 'Добавить продажу').click();
+    cy.get('#tx-form [role=alert]').should('contain', 'только 0.5 BTC');
+  });
 });

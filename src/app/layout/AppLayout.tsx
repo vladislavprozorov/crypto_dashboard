@@ -3,7 +3,7 @@ import { useAlerts } from '../../features/alerts/model/useAlerts';
 import { ThemeToggle } from '../../features/theme/ThemeToggle';
 import { useWatchlist } from '../../features/watchlist/model/useWatchlist';
 import { useMetaMask } from '../../shared/lib/wallet/useMetaMask';
-import { BellIcon, MarketIcon, StarIcon } from '../../shared/ui/icons';
+import { BellIcon, MarketIcon, StarIcon, WalletIcon } from '../../shared/ui/icons';
 import { toast } from '../../shared/lib/toast';
 import { Toaster } from '../../shared/ui/Toaster';
 import { AlertsWatcher } from '../../widgets/AlertsWatcher';
@@ -16,6 +16,7 @@ function useNavItems() {
   const active = alerts.filter((a) => a.triggeredAt == null).length;
   return [
     { to: '/', label: 'Рынок', icon: MarketIcon, count: null, end: true },
+    { to: '/portfolio', label: 'Портфель', icon: WalletIcon, count: null, end: false },
     { to: '/watchlist', label: 'Вотчлист', icon: StarIcon, count: ids.length, end: false },
     { to: '/alerts', label: 'Алерты', icon: BellIcon, count: active || null, end: false },
   ];
@@ -118,7 +119,7 @@ export function AppLayout() {
 
       <nav
         aria-label="Разделы"
-        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t border-ink bg-paper pb-[env(safe-area-inset-bottom)] md:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-4 border-t border-ink bg-paper pb-[env(safe-area-inset-bottom)] md:hidden"
       >
         {nav.map((item) => (
           <NavLink

@@ -7,6 +7,7 @@ const DashboardPage = lazy(() => import('../../pages/dashboard/DashboardPage'));
 const CoinPage = lazy(() => import('../../pages/coin/CoinPage'));
 const WatchlistPage = lazy(() => import('../../pages/watchlist/WatchlistPage'));
 const AlertsPage = lazy(() => import('../../pages/alerts/AlertsPage'));
+const PortfolioPage = lazy(() => import('../../pages/portfolio/PortfolioPage'));
 
 function PageFallback() {
   return (
@@ -56,6 +57,14 @@ export default function AppRouter() {
             element={
               <Suspense fallback={<PageFallback />}>
                 <WatchlistPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="portfolio"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <PortfolioPage />
               </Suspense>
             }
           />
