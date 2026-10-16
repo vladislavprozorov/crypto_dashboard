@@ -85,3 +85,9 @@ export const MarketIcon = (p: IconProps) => (
     <path d="M1.5 12.5l4-4.5 3 2.5 5.5-6.5M10.5 4h3.5v3.5" />
   </Svg>
 );
+
+export const WalletIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M2 4.5h11.5v9H2zM2 4.5l9-2.5v2.5M10.5 9h3" />
+  </Svg>
+);

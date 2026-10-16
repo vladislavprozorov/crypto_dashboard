@@ -8,6 +8,7 @@ import { CoinHeadline } from '../../widgets/CoinHeadline';
 import { DataNote } from '../../widgets/DataNote';
 import { MarketSection } from '../../widgets/MarketSection';
 import { MarketStrip } from '../../widgets/MarketStrip';
+import { PortfolioPanel } from '../../widgets/portfolio/PortfolioPanel';
 import { AlertsPanel, WatchlistPanel } from '../../widgets/SidePanels';
 import { StatGrid } from '../../widgets/StatGrid';
 
@@ -66,6 +67,7 @@ export default function DashboardPage() {
           )}
         </div>
         <aside className="flex min-w-0 flex-[1_1_320px] flex-col gap-4 md:gap-6">
+          <PortfolioPanel />
           <WatchlistPanel coins={coins} />
           <AlertsPanel coins={coins} newAlertFor={selected?.id} />
         </aside>
