@@ -1,10 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
-    <link rel="icon" href="/favicon.ico" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <meta
+      name="description"
+      content="Мониторинг криптовалют в реальном времени: live-цены через WebSocket, вотчлист, ценовые алерты, графики."
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Crypto Dashboard — рынок в реальном времени</title>
+    <script>
+      // Тема ставится до первой отрисовки, чтобы не было вспышки светлого фона
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) t = JSON.parse(t);
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
