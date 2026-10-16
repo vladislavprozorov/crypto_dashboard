@@ -23,5 +23,15 @@ export default defineConfig({
     // Чтобы пути внутри CSS/JS были корректные
     outDir: 'dist',
     assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        // стабильные вендорные чанки лучше кэшируются между деплоями
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          query: ['@tanstack/react-query', '@tanstack/react-table', 'axios'],
+          charts: ['recharts'],
+        },
+      },
+    },
   },
 });
