@@ -158,7 +158,7 @@ export default function CoinPage() {
 
       <div className="flex flex-wrap items-start gap-4 md:gap-6">
         <div className="flex min-w-0 flex-[999_1_640px] flex-col gap-4 md:gap-6">
-          <ChartPanel coin={coin} height={360} />
+          <ChartPanel coin={coin} height={360} allowCandles />
           <Panel id="stats" title="Показатели">
             <StatGrid
               stats={[
